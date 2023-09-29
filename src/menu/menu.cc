@@ -1,5 +1,7 @@
 #include "menu.hpp"
 
+using namespace std;
+
 namespace menu {
    void titulo(const string_view& title) {
       ECHO_HIGHLIGHT("{0:*<{1}}\n*{0: <5}{2}{0: <5}*\n{0:*<{1}}\n", "", title.size()+12, title);

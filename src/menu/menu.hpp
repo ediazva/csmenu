@@ -1,4 +1,6 @@
 #pragma once
+#include "function.hpp"
+
 #include <iostream>
 #include <vector>
 #include <string_view>
@@ -16,8 +18,8 @@ namespace menu {
    void ignorar_linea();
    template<typename T> requires requires (T t) {std::cin >> t;}
    bool safe_cin(T& t) {
-      if(!(cin >> t)) {
-         cin.clear();
+      if(!(std::cin >> t)) {
+         std::cin.clear();
          return false;
       }
 
@@ -51,8 +53,8 @@ namespace menu {
 
    class Menu {
    public:
-      //             Label       Delegate
-      typedef std::pair<std::string_view, std::function<void()>> menu_t;
+      //                         Label           Delegate
+      typedef std::pair<std::string_view, priv::Function<void()>> menu_t;
       typedef std::vector<menu_t> menulist_t;
       Menu(std::initializer_list<menu_t> menus);
       void loop(const std::string_view& main_title);

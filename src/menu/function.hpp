@@ -24,7 +24,7 @@ namespace menu::priv {
          return &m_storage;
       }
    public:
-      explicit Function(R(*fn)(Args...)) {
+      Function(R(*fn)(Args...)) {
          using pointer_t = R(*)(Args...);
 
          ::new (get_memory()) pointer_t(fn);
