@@ -1,0 +1,6 @@
+file(GLOB_RECURSE TEST_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cc)
+foreach(test_file ${TEST_FILES})
+   get_filename_component(test_filename ${test_file} NAME_WE)
+   add_executable(${test_filename} ${test_file})
+   target_link_libraries(${test_filename} benchmark::benchmark menu-lib)
+endforeach()
