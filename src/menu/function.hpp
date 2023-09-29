@@ -1,7 +1,7 @@
 // https://vittorioromeo.info/index/blog/passing_functions_to_functions.html
 
 #pragma once
-// #include <concepts>
+#include <concepts>
 #include <type_traits>
 #include <utility>
 
@@ -35,7 +35,7 @@ namespace menu {
          };
       }
 
-      template<typename Fn>
+      template<typename Fn> requires std::same_as<std::invoke_result_t<Fn, Args...>, R>
       explicit Function(Fn& fn) {
          using pointer_t = void*;
 

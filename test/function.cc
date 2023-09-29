@@ -24,14 +24,14 @@ static void STDFunction_Function(benchmark::State& state) {
 static void MENUFunction_Lambda(benchmark::State& state) {
    for(auto _ : state) {
       auto bar = [&]() {};
-      menu::priv::Function<void()> f(bar);
+      menu::Function<void()> f(bar);
       f();
    }
 }
 
 static void MENUFunction_Function(benchmark::State& state) {
    for(auto _ : state) {
-      menu::priv::Function<void()> f(foo);
+      menu::Function<void()> f(foo);
       f();
    }
 }

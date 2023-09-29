@@ -53,14 +53,14 @@ namespace menu {
    class Menu {
    public:
       //                       Label         Delegate
-      typedef std::pair<std::string_view, Function<void()>> menu_t;
-      typedef std::vector<menu_t> menulist_t;
-      Menu(std::initializer_list<menu_t> menus);
+      typedef std::pair<std::string_view, Function<void()>> item_t;
+      typedef std::vector<item_t> itemlist_t;
+      Menu(std::initializer_list<item_t> menus);
       void loop(const std::string_view& main_title);
    private:
       void safe_execute(char option);
       void menu_principal(const std::string_view& main_title);
 
-      menulist_t m_menus;
+      itemlist_t m_menus;
    };
 } // namespace menu

@@ -21,7 +21,7 @@ namespace menu {
       std::getchar();
    }
 
-   Menu::Menu(initializer_list<menu_t> menus) :
+   Menu::Menu(initializer_list<item_t> menus) :
       m_menus{menus.begin(), menus.end()} {}
 
    void Menu::loop(const string_view& main_title) {
