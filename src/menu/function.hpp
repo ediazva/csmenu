@@ -5,7 +5,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace menu::priv {
+namespace menu {
    template<typename Signature>
    class Function {};
 
@@ -52,4 +52,4 @@ namespace menu::priv {
          return m_callback(get_memory(), std::forward<Args>(args)...);
       }
    };   
-} // namespace menu::priv
+} // namespace menu

@@ -1,0 +1,6 @@
+file(GLOB_RECURSE EXAMPLE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cc)
+foreach(example_file ${EXAMPLE_FILES})
+   get_filename_component(example_filename ${example_file} NAME_WE)
+   add_executable(${example_filename} ${example_file})
+   target_link_libraries(${example_filename} menu-lib)
+endforeach()

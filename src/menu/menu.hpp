@@ -50,11 +50,10 @@ namespace menu {
          d) Opción 4
          e) Salir.
    */
-
    class Menu {
    public:
-      //                         Label           Delegate
-      typedef std::pair<std::string_view, priv::Function<void()>> menu_t;
+      //                       Label         Delegate
+      typedef std::pair<std::string_view, Function<void()>> menu_t;
       typedef std::vector<menu_t> menulist_t;
       Menu(std::initializer_list<menu_t> menus);
       void loop(const std::string_view& main_title);
