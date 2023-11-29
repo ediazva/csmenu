@@ -1,43 +1,22 @@
-#include <benchmark/benchmark.h>
-#include <functional>
 #include <menu/function.hpp>
+#include <cstdio>
 
-static void foo() {
-   for(int i = 0; i < 10; ++i);
+#define EXECUTE(foo) do {\
+   printf("Executing %s...\n", #foo); \
+   foo; \
+} while(0)
+
+void a() {
+   puts("Holaaaa");
 }
 
-static void STDFunction_Lambda(benchmark::State& state) {
-   for(auto _ : state) {
-      auto bar = [&]() {};
-      std::function f(bar);
-      f();
-   }
-}
+int main() {
+   menu::Function<void()> foo(a);
+   menu::Function<void()> bar;
+   // menu::Function<void()> bar = foo;         Esto debe provocar un error 
+   bar = std::move(foo);
+   EXECUTE(bar());
+   // EXECUTE(foo());         ERROR
 
-static void STDFunction_Function(benchmark::State& state) {
-   for(auto _ : state) {
-      std::function f{foo};
-      f();
-   }
+   return 0;
 }
-
-static void MENUFunction_Lambda(benchmark::State& state) {
-   for(auto _ : state) {
-      auto bar = [&]() {};
-      menu::Function<void()> f(bar);
-      f();
-   }
-}
-
-static void MENUFunction_Function(benchmark::State& state) {
-   for(auto _ : state) {
-      menu::Function<void()> f(foo);
-      f();
-   }
-}
-
-BENCHMARK(STDFunction_Lambda);
-BENCHMARK(STDFunction_Function);
-BENCHMARK(MENUFunction_Lambda);
-BENCHMARK(MENUFunction_Function);
-BENCHMARK_MAIN();
