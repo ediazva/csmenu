@@ -15,11 +15,11 @@ void menu_opcion3() {
 }
 
 int main() {
-   menu::Menu main_menu {
-      {"Opcion 1", menu_opcion1},
-      {"Opcion 2", menu_opcion2},
-      {"Opcion 3", menu_opcion3},
-   };
+   menu::Menu main_menu(
+      menu::make_item("Opcion 1", menu_opcion1),
+      menu::make_item("Opcion 2", menu_opcion2),
+      menu::make_item("Opcion 3", menu_opcion3)
+   );
 
    main_menu.loop("MAIN MENU");
  
