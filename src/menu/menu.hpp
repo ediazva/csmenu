@@ -2,6 +2,7 @@
 #include "function.hpp"
 
 #include <iostream>
+#include <concepts>
 #include <vector>
 #include <string_view>
 #include <fmt/format.h>
@@ -40,6 +41,14 @@ namespace menu {
       return t;
    }
    
+   //                       Label         Delegate
+   typedef std::pair<std::string_view, Function<void()>> MenuItem;
+   inline MenuItem make_item(const std::string_view& label, Function<void()>&& f) {
+      return make_pair(label, std::move(f));
+   }
+   template<typename T>
+   concept is_item_t = std::same_as<T, MenuItem>; 
+   
    /*
          *****************************
          *           TITULO          *
@@ -52,15 +61,20 @@ namespace menu {
    */
    class Menu {
    public:
-      //                       Label         Delegate
-      typedef std::pair<std::string_view, Function<void()>> item_t;
-      typedef std::vector<item_t> itemlist_t;
-      Menu(std::initializer_list<item_t> menus);
+      typedef std::vector<MenuItem> ItemList;
+      // Usando T&& lo que hacemos es una referencia universal:
+      //                      T se convierte en:
+      // Lvalue -> Lvalue        T&
+      // Rvalue -> Rvalue        T        Aprovechando esto usamos un concepto que solo permite usar tipos T, no T&
+      template<is_item_t... T>
+      Menu(T&&... items) {
+         (m_menus.emplace_back(std::forward<T>(items)),...);
+      }
       void loop(const std::string_view& main_title);
    private:
       void safe_execute(char option);
       void menu_principal(const std::string_view& main_title);
 
-      itemlist_t m_menus;
+      ItemList m_menus;
    };
 } // namespace menu

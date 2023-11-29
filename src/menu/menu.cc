@@ -21,9 +21,6 @@ namespace menu {
       std::getchar();
    }
 
-   Menu::Menu(initializer_list<item_t> menus) :
-      m_menus{menus.begin(), menus.end()} {}
-
    void Menu::loop(const string_view& main_title) {
       char opcion{};
       const char exit_option = 'a' + m_menus.size();
